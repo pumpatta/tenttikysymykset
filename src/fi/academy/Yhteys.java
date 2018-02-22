@@ -8,7 +8,7 @@ public class Yhteys {
     public static Connection avaaYhteys() throws SQLException, ClassNotFoundException {
         String connstr = String.format("jdbc:mysql://localhost:3306/tentti?useSSL=false");
         tarkistaAjuriluokka();
-        return DriverManager.getConnection(connstr, "root" ,"salananaas");
+        return DriverManager.getConnection(connstr, "root" ,"salasana");
     }
     private static void tarkistaAjuriluokka() throws ClassNotFoundException {
         Class.forName("com.mysql.jdbc.Driver");
