@@ -27,6 +27,7 @@ public class Kyselijä {
 
                 } else {
                     kaikki++;
+                    System.out.println("Pisteesi ovat tällä hetkellä: " + pisteet + "/" + kaikki);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
