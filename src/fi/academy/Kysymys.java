@@ -9,7 +9,7 @@ public class Kysymys {
     private int id;
     private String kysymysteksti;
 
-    public Kysymys(int id) {
+    public Kysymys() {
         this.id = id;
         this.kysymysteksti = kysymysteksti;
     }
@@ -39,10 +39,17 @@ public class Kysymys {
     }*/
     public void tulostaKysymys(int id) throws SQLException, ClassNotFoundException {
         Connection con = Yhteys.avaaYhteys();
-        PreparedStatement pstmt = con.prepareStatement("select * from kysymys");
-        ResultSet rs = pstmt.executeQuery();
+
+        PreparedStatement preparedStatement = null;
+        String sql = "SELECT * from kysymys where id=?";
+        PreparedStatement lause = con.prepareStatement(sql);
+        preparedStatement.setString(1, "id");
+
+//        PreparedStatement pstmt = con.prepareStatement("select * from kysymys where id=?");
+//        String annettuId = "1";
+        ResultSet rs = lause.executeQuery();
         while(rs.next()) {
-            System.out.println(rs);
+            System.out.println(rs.getString(2));
         }
     }
 
