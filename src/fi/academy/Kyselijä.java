@@ -13,6 +13,7 @@ public class Kyselijä {
             kysely.tulostaKysymys(kysymys);
             System.out.println("Anna vastaus: ");
             int vastaus = kyselija.nextInt();
+            kysely.tarkistus(kysymys,vastaus);
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {

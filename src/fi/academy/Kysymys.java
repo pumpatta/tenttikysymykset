@@ -9,6 +9,7 @@ public class Kysymys {
     private int id;
     private String kysymysteksti;
 
+
     public Kysymys() {
         this.id = id;
         this.kysymysteksti = kysymysteksti;
@@ -44,7 +45,7 @@ public class Kysymys {
         PreparedStatement lause = con.prepareStatement(sql);
         lause.setInt(1, id);
         ResultSet rs = lause.executeQuery();
-        while(rs.next()) {
+        while (rs.next()) {
             System.out.println(rs.getString(2));
         }
         tulostaVaihtoehdot(id);
@@ -58,15 +59,34 @@ public class Kysymys {
         lause.setInt(1, id);
         ResultSet rs = lause.executeQuery();
         int i = 1;
-        String totuus = "";
-        while(rs.next()) {
+        while (rs.next()) {
             System.out.println(i + ") " + rs.getString(3));
-            if (rs.getString(4).equals("T")) {
-                totuus = rs.getString(3);
-            }
             i++;
         }
-        System.out.println("totuus on: " + totuus);
+    }
+
+    public boolean tarkistus(int kysymysid, int vastausid) throws SQLException, ClassNotFoundException {
+        Connection con = Yhteys.avaaYhteys();
+
+        String sql = "SELECT * from kysymysvaihtoehdot where id=?";
+        PreparedStatement lause = con.prepareStatement(sql);
+        lause.setInt(1, kysymysid);
+        ResultSet rs = lause.executeQuery();
+        int i = 1;
+        int totuus = 0;
+        while (rs.next()) {
+            if (rs.getString(4).equals("T")) {
+                totuus = rs.getInt(1);
+            }
+        }
+        if (totuus == vastausid) {
+            System.out.println("Vastasit oikein!");
+            return true;
+
+        } else {
+            System.out.println("Vastasit väärin.");
+            return false;
+        }
     }
 
     @Override
