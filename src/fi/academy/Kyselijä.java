@@ -1,22 +1,25 @@
 package fi.academy;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Kyselijä {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException, ClassNotFoundException {
         Scanner kyselija = new Scanner(System.in);
         int pisteet = 0;
-        int kaikki = 0;
-        while(true) {
-            System.out.println("Anna kysymysID (1-3)");
-            int kysymys = kyselija.nextInt();
+        ArrayList <Integer> kyssarit = new ArrayList<>();
+        Kysymys kysely = new Kysymys();
 
+        for (int i = 1; i <= kysely.arvoKysymykset() ; i++) {
+            kyssarit.add(i);
+        }
+        System.out.println(kyssarit);
+        Collections.shuffle(kyssarit);
 
-            if(kysymys == 0){
-                break;
-            }
-
-            Kysymys kysely = new Kysymys();
+        int j = 0;
+        while(j<10) {
+            int kysymys = kyssarit.get(j);
             try {
                 kysely.arvoKysymykset();
                 kysely.tulostaKysymys(kysymys);
@@ -24,20 +27,18 @@ public class Kyselijä {
                 int vastaus = kyselija.nextInt();
                 if (kysely.tarkistus(kysymys, vastaus)==true) {
                     pisteet++;
-                    kaikki++;
-                    System.out.println("Pisteesi ovat tällä hetkellä: " + pisteet + "/" + kaikki);
+                    System.out.println("Pisteesi ovat tällä hetkellä: " + pisteet + "/10");
 
                 } else {
-                    kaikki++;
-                    System.out.println("Pisteesi ovat tällä hetkellä: " + pisteet + "/" + kaikki);
+                    System.out.println("Pisteesi ovat tällä hetkellä: " + pisteet + "/10");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
-
+        j++;
         }
-        System.out.println("Pisteesi olivat: " + pisteet);
+        System.out.println("Kysely on nyt ohitse! Hyvin tehty! Kokonaispisteesi on: " + pisteet);
     }
 }
