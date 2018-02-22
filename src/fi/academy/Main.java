@@ -1,8 +1,2 @@
-package fi.academy;
+//Samulle vielä puhtaampi maini
 
-public class Main {
-
-    public static void main(String[] args) {
-
-    }
-}
