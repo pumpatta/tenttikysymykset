@@ -68,11 +68,10 @@ public class Kysymys {
     public boolean tarkistus(int kysymysid, int vastausid) throws SQLException, ClassNotFoundException {
         Connection con = Yhteys.avaaYhteys();
 
-        String sql = "SELECT * from kysymysvaihtoehdot where id=?";
+        String sql = "SELECT * from kysymysvaihtoehdot where kysymysid=?";
         PreparedStatement lause = con.prepareStatement(sql);
         lause.setInt(1, kysymysid);
         ResultSet rs = lause.executeQuery();
-        int i = 1;
         int totuus = 0;
         while (rs.next()) {
             if (rs.getString(4).equals("T")) {
