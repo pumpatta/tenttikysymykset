@@ -40,10 +40,9 @@ public class Kysymys {
     public void tulostaKysymys(int id) throws SQLException, ClassNotFoundException {
         Connection con = Yhteys.avaaYhteys();
 
-        PreparedStatement preparedStatement = null;
         String sql = "SELECT * from kysymys where id=?";
         PreparedStatement lause = con.prepareStatement(sql);
-        preparedStatement.setString(1, "id");
+        lause.setInt(1, id);
 
 //        PreparedStatement pstmt = con.prepareStatement("select * from kysymys where id=?");
 //        String annettuId = "1";
@@ -51,6 +50,7 @@ public class Kysymys {
         while(rs.next()) {
             System.out.println(rs.getString(2));
         }
+
     }
 
     @Override
