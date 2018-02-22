@@ -14,7 +14,6 @@ public class Kyselijä {
         for (int i = 1; i <= kysely.arvoKysymykset() ; i++) {
             kyssarit.add(i);
         }
-        System.out.println(kyssarit);
         Collections.shuffle(kyssarit);
 
         int j = 0;
