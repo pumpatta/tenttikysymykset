@@ -1,9 +1,8 @@
 package fi.academy;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Kysymys {
     private int id;
@@ -38,6 +37,23 @@ public class Kysymys {
         e.printStackTrace();
 
     }*/
+    public int arvoKysymykset() throws SQLException, ClassNotFoundException {
+        Connection con = Yhteys.avaaYhteys();
+//        String sql = "select count(id) as total from kysymys";
+////        PreparedStatement lause = con.prepareStatement(sql);
+////        ResultSet rs = lause.executeQuery();
+////        rs.getInt("total");
+////        System.out.println("rs tulostus" + rs);
+
+        int total = 0;
+        Statement lause = con.createStatement();
+        ResultSet rs = lause.executeQuery("SELECT count(id) as total from kysymys");
+        while (rs.next()) {
+            total = rs.getInt("total");
+        }
+        return total;
+    }
+
     public void tulostaKysymys(int id) throws SQLException, ClassNotFoundException {
         Connection con = Yhteys.avaaYhteys();
 

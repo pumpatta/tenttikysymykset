@@ -8,8 +8,9 @@ public class Kyselijä {
         int pisteet = 0;
         int kaikki = 0;
         while(true) {
-            System.out.println("Anna kysymysID (1-2)");
+            System.out.println("Anna kysymysID (1-3)");
             int kysymys = kyselija.nextInt();
+
 
             if(kysymys == 0){
                 break;
@@ -17,6 +18,7 @@ public class Kyselijä {
 
             Kysymys kysely = new Kysymys();
             try {
+                kysely.arvoKysymykset();
                 kysely.tulostaKysymys(kysymys);
                 System.out.println("Anna vastaus: ");
                 int vastaus = kyselija.nextInt();
