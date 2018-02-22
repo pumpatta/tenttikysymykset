@@ -43,14 +43,30 @@ public class Kysymys {
         String sql = "SELECT * from kysymys where id=?";
         PreparedStatement lause = con.prepareStatement(sql);
         lause.setInt(1, id);
-
-//        PreparedStatement pstmt = con.prepareStatement("select * from kysymys where id=?");
-//        String annettuId = "1";
         ResultSet rs = lause.executeQuery();
         while(rs.next()) {
             System.out.println(rs.getString(2));
         }
+        tulostaVaihtoehdot(id);
+    }
 
+    public void tulostaVaihtoehdot(int id) throws SQLException, ClassNotFoundException {
+        Connection con = Yhteys.avaaYhteys();
+
+        String sql = "SELECT * from kysymysvaihtoehdot where kysymysid=?";
+        PreparedStatement lause = con.prepareStatement(sql);
+        lause.setInt(1, id);
+        ResultSet rs = lause.executeQuery();
+        int i = 1;
+        String totuus = "";
+        while(rs.next()) {
+            System.out.println(i + ") " + rs.getString(3));
+            if (rs.getString(4).equals("T")) {
+                totuus = rs.getString(3);
+            }
+            i++;
+        }
+        System.out.println("totuus on: " + totuus);
     }
 
     @Override

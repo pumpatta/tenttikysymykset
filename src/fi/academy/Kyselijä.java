@@ -11,6 +11,8 @@ public class Kyselijä {
         Kysymys kysely = new Kysymys();
         try {
             kysely.tulostaKysymys(kysymys);
+            System.out.println("Anna vastaus: ");
+            int vastaus = kyselija.nextInt();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
