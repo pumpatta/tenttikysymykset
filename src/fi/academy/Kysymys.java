@@ -1,8 +1,8 @@
 package fi.academy;
 
 public class Kysymys {
-    int id;
-    String kysymysteksti;
+    private int id;
+    private String kysymysteksti;
 
     public Kysymys(int id, String kysymysteksti) {
         this.id = id;
